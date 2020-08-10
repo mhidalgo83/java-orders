@@ -38,8 +38,7 @@ public class Order {
         inverseJoinColumns = @JoinColumn(name = "paymentid"))
     private Set<Payment> payments = new HashSet<>();
 
-
-
+    
     public Order() {
     }
 
@@ -88,6 +87,10 @@ public class Order {
 
     public void setAdvanceamount(double advanceamount) {
         this.advanceamount = advanceamount;
+    }
+
+    public void addPayments(Payment payment) {
+        payment.setType(payment.getType());
     }
 
 }

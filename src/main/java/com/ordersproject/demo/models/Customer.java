@@ -26,14 +26,12 @@ public class Customer {
     private double outstandingamt;
     private String phone;
 
-    @OneToMany (mappedBy = "orders", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany (mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Order> orders = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "agentcode", nullable = false)
     private Agent agent;
-
-
 
     public Customer() {
     }

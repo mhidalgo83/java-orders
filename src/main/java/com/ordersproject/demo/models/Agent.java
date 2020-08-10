@@ -20,7 +20,7 @@ public class Agent {
     private String phone;
     private String country;
 
-    @OneToMany (mappedBy = "customers", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany (mappedBy = "agent", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Customer> customers = new ArrayList<>();
 
     public Agent(String agentname, String workingarea, double commission, String phone, String country) {
