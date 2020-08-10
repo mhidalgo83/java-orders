@@ -38,7 +38,7 @@ public class Order {
         inverseJoinColumns = @JoinColumn(name = "paymentid"))
     private Set<Payment> payments = new HashSet<>();
 
-    
+
     public Order() {
     }
 
@@ -90,7 +90,7 @@ public class Order {
     }
 
     public void addPayments(Payment payment) {
-        payment.setType(payment.getType());
+       payments.add(payment);
     }
 
 }
