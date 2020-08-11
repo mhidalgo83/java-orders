@@ -1,6 +1,6 @@
 package com.ordersproject.demo;
 
-//import com.github.javafaker.Faker;
+import com.github.javafaker.Faker;
 import com.ordersproject.demo.models.Agent;
 import com.ordersproject.demo.models.Customer;
 import com.ordersproject.demo.models.Order;
@@ -18,6 +18,7 @@ import java.util.HashSet;
 import java.util.Locale;
 import java.util.Random;
 import java.util.Set;
+import java.util.concurrent.ThreadLocalRandom;
 
 
 @Transactional
@@ -59,6 +60,10 @@ public class SeedData implements CommandLineRunner {
     @Transactional
     @Override
     public void run(String[] args) throws Exception {
+
+
+
+
         Payment pay1 = new Payment("Cash");
         Payment pay2 = new Payment("Gift Card");
         Payment pay3 = new Payment("Credit Card");
@@ -129,6 +134,12 @@ public class SeedData implements CommandLineRunner {
                 0.11,
                 "008-22536178",
                 "");
+
+        Faker faker = new Faker();
+
+
+
+
 
         Customer c01 = new Customer("Holmes",
                 "London",
@@ -406,6 +417,21 @@ public class SeedData implements CommandLineRunner {
                 "PPHGRTS",
                 a10);
 
+        for ( int i = 0; i < 99; i++) {
+            Customer randCust = new Customer(faker.name().firstName(),
+                    faker.address().city(),
+                    faker.address().state(),
+                    faker.address().country(),
+                    Integer.toString((ThreadLocalRandom.current().nextInt() * 1) / 1000),
+                    Math.round(ThreadLocalRandom.current().nextDouble()) * 10000,
+                    Math.round(ThreadLocalRandom.current().nextDouble()) * 10000,
+                    Math.round(ThreadLocalRandom.current().nextDouble()) * 10000,
+                    Math.round(ThreadLocalRandom.current().nextDouble()) * 10000,
+                    faker.phoneNumber().phoneNumber(),
+                    a03);
+            custrepos.save(randCust);
+        }
+
         Order o01 = new Order(1000.00,
                 600.00,
                 c13,
@@ -518,6 +544,7 @@ public class SeedData implements CommandLineRunner {
         custrepos.save(c24);
         custrepos.save(c25);
 
+
         ordersrepos.save(o01);
         ordersrepos.save(o02);
         ordersrepos.save(o03);
@@ -530,5 +557,8 @@ public class SeedData implements CommandLineRunner {
         ordersrepos.save(o10);
         ordersrepos.save(o11);
         ordersrepos.save(o12);
+
+
+
     }
 }
