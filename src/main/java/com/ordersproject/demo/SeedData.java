@@ -61,7 +61,8 @@ public class SeedData implements CommandLineRunner {
     @Override
     public void run(String[] args) throws Exception {
 
-
+        Faker faker = new Faker();
+        Random random = new Random();
 
 
         Payment pay1 = new Payment("Cash");
@@ -135,7 +136,7 @@ public class SeedData implements CommandLineRunner {
                 "008-22536178",
                 "");
 
-        Faker faker = new Faker();
+
 
 
 
@@ -417,21 +418,6 @@ public class SeedData implements CommandLineRunner {
                 "PPHGRTS",
                 a10);
 
-        for ( int i = 0; i < 99; i++) {
-            Customer randCust = new Customer(faker.name().firstName(),
-                    faker.address().city(),
-                    faker.address().state(),
-                    faker.address().country(),
-                    Integer.toString((ThreadLocalRandom.current().nextInt() * 1) / 1000),
-                    Math.round(ThreadLocalRandom.current().nextDouble()) * 10000,
-                    Math.round(ThreadLocalRandom.current().nextDouble()) * 10000,
-                    Math.round(ThreadLocalRandom.current().nextDouble()) * 10000,
-                    Math.round(ThreadLocalRandom.current().nextDouble()) * 10000,
-                    faker.phoneNumber().phoneNumber(),
-                    a03);
-            custrepos.save(randCust);
-        }
-
         Order o01 = new Order(1000.00,
                 600.00,
                 c13,
@@ -558,7 +544,20 @@ public class SeedData implements CommandLineRunner {
         ordersrepos.save(o11);
         ordersrepos.save(o12);
 
-
+        for ( int i = 0; i < 99; i++) {
+            Customer randCust = new Customer(faker.name().firstName(),
+                    faker.address().city(),
+                    faker.address().state(),
+                    faker.address().country(),
+                    Integer.toString(random.nextInt(4)),
+                    Math.round(ThreadLocalRandom.current().nextDouble(10)) * 1000,
+                    Math.round(ThreadLocalRandom.current().nextDouble(10)) * 1000,
+                    Math.round(ThreadLocalRandom.current().nextDouble(10)) * 1000,
+                    Math.round(ThreadLocalRandom.current().nextDouble(10)) * 1000,
+                    faker.phoneNumber().phoneNumber(),
+                    a03);
+            custrepos.save(randCust);
+        }
 
     }
 }
